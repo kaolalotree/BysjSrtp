@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.srtp.mapper.BylwMapper" >
+  <resultMap id="BaseResultMap" type="com.srtp.model.Bylw" >
+    <id column="saccount" property="saccount" jdbcType="BIGINT" />
+    <result column="uploaded" property="uploaded" jdbcType="TINYINT" />
+    <result column="filepath" property="filepath" jdbcType="VARCHAR" />
+    <result column="supervisorpass" property="supervisorpass" jdbcType="TINYINT" />
+    <result column="ds_grade" property="dsGrade" jdbcType="INTEGER" />
+    <result column="anonymouspass" property="anonymouspass" jdbcType="TINYINT" />
+    <result column="md_grade" property="mdGrade" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.srtp.model.BylwWithBLOBs" extends="BaseResultMap" >
+    <result column="paperintro" property="paperintro" jdbcType="LONGVARCHAR" />
+    <result column="supervisorcomment" property="supervisorcomment" jdbcType="LONGVARCHAR" />
+    <result column="anonymouscomment" property="anonymouscomment" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    saccount, uploaded, filepath, supervisorpass, ds_grade, anonymouspass, md_grade
+  </sql>
+  <sql id="Blob_Column_List" >
+    paperintro, supervisorcomment, anonymouscomment
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bylw
+    where saccount = #{saccount,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bylw
+    where saccount = #{saccount,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.srtp.model.BylwWithBLOBs" >
+    insert into bylw (saccount, uploaded, filepath, 
+      supervisorpass, ds_grade, anonymouspass, 
+      md_grade, paperintro, supervisorcomment, 
+      anonymouscomment)
+    values (#{saccount,jdbcType=BIGINT}, #{uploaded,jdbcType=TINYINT}, #{filepath,jdbcType=VARCHAR}, 
+      #{supervisorpass,jdbcType=TINYINT}, #{dsGrade,jdbcType=INTEGER}, #{anonymouspass,jdbcType=TINYINT}, 
+      #{mdGrade,jdbcType=INTEGER}, #{paperintro,jdbcType=LONGVARCHAR}, #{supervisorcomment,jdbcType=LONGVARCHAR}, 
+      #{anonymouscomment,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.srtp.model.BylwWithBLOBs" >
+    insert into bylw
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="saccount != null" >
+        saccount,
+      </if>
+      <if test="uploaded != null" >
+        uploaded,
+      </if>
+      <if test="filepath != null" >
+        filepath,
+      </if>
+      <if test="supervisorpass != null" >
+        supervisorpass,
+      </if>
+      <if test="dsGrade != null" >
+        ds_grade,
+      </if>
+      <if test="anonymouspass != null" >
+        anonymouspass,
+      </if>
+      <if test="mdGrade != null" >
+        md_grade,
+      </if>
+      <if test="paperintro != null" >
+        paperintro,
+      </if>
+      <if test="supervisorcomment != null" >
+        supervisorcomment,
+      </if>
+      <if test="anonymouscomment != null" >
+        anonymouscomment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="saccount != null" >
+        #{saccount,jdbcType=BIGINT},
+      </if>
+      <if test="uploaded != null" >
+        #{uploaded,jdbcType=TINYINT},
+      </if>
+      <if test="filepath != null" >
+        #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="supervisorpass != null" >
+        #{supervisorpass,jdbcType=TINYINT},
+      </if>
+      <if test="dsGrade != null" >
+        #{dsGrade,jdbcType=INTEGER},
+      </if>
+      <if test="anonymouspass != null" >
+        #{anonymouspass,jdbcType=TINYINT},
+      </if>
+      <if test="mdGrade != null" >
+        #{mdGrade,jdbcType=INTEGER},
+      </if>
+      <if test="paperintro != null" >
+        #{paperintro,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="supervisorcomment != null" >
+        #{supervisorcomment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="anonymouscomment != null" >
+        #{anonymouscomment,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.srtp.model.BylwWithBLOBs" >
+    update bylw
+    <set >
+      <if test="uploaded != null" >
+        uploaded = #{uploaded,jdbcType=TINYINT},
+      </if>
+      <if test="filepath != null" >
+        filepath = #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="supervisorpass != null" >
+        supervisorpass = #{supervisorpass,jdbcType=TINYINT},
+      </if>
+      <if test="dsGrade != null" >
+        ds_grade = #{dsGrade,jdbcType=INTEGER},
+      </if>
+      <if test="anonymouspass != null" >
+        anonymouspass = #{anonymouspass,jdbcType=TINYINT},
+      </if>
+      <if test="mdGrade != null" >
+        md_grade = #{mdGrade,jdbcType=INTEGER},
+      </if>
+      <if test="paperintro != null" >
+        paperintro = #{paperintro,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="supervisorcomment != null" >
+        supervisorcomment = #{supervisorcomment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="anonymouscomment != null" >
+        anonymouscomment = #{anonymouscomment,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where saccount = #{saccount,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.srtp.model.BylwWithBLOBs" >
+    update bylw
+    set uploaded = #{uploaded,jdbcType=TINYINT},
+      filepath = #{filepath,jdbcType=VARCHAR},
+      supervisorpass = #{supervisorpass,jdbcType=TINYINT},
+      ds_grade = #{dsGrade,jdbcType=INTEGER},
+      anonymouspass = #{anonymouspass,jdbcType=TINYINT},
+      md_grade = #{mdGrade,jdbcType=INTEGER},
+      paperintro = #{paperintro,jdbcType=LONGVARCHAR},
+      supervisorcomment = #{supervisorcomment,jdbcType=LONGVARCHAR},
+      anonymouscomment = #{anonymouscomment,jdbcType=LONGVARCHAR}
+    where saccount = #{saccount,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.srtp.model.Bylw" >
+    update bylw
+    set uploaded = #{uploaded,jdbcType=TINYINT},
+      filepath = #{filepath,jdbcType=VARCHAR},
+      supervisorpass = #{supervisorpass,jdbcType=TINYINT},
+      ds_grade = #{dsGrade,jdbcType=INTEGER},
+      anonymouspass = #{anonymouspass,jdbcType=TINYINT},
+      md_grade = #{mdGrade,jdbcType=INTEGER}
+    where saccount = #{saccount,jdbcType=BIGINT}
+  </update>
+</mapper>

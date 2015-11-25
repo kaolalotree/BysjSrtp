@@ -1,12 +1,9 @@
 package com.srtp.serviceImple;
 
-import com.srtp.mapper.CommentMapper;
-import com.srtp.model.Comment;
+import com.srtp.mapper.PeopleMapper;
 import com.srtp.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
  * Created by chenxin on 15/11/25.
@@ -14,8 +11,8 @@ import javax.annotation.Resource;
 @Service("testService")
 public class TestServiceImple implements TestService {
     @Autowired
-    private CommentMapper commentMapper;
-    public Comment getComment(Integer id) {
-        return commentMapper.selectByPrimaryKey(1);
+    private PeopleMapper peopleMapper;
+    public String getComment(Integer id) {
+        return "hello";
     }
 }

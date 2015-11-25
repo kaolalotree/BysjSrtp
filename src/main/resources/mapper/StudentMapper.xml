@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.srtp.mapper.StudentMapper" >
+  <resultMap id="BaseResultMap" type="com.srtp.model.Student" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="spassword" property="spassword" jdbcType="VARCHAR" />
+    <result column="proposalscore" property="proposalscore" jdbcType="INTEGER" />
+    <result column="midtermscore" property="midtermscore" jdbcType="INTEGER" />
+    <result column="finalscore" property="finalscore" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="mayjor" property="mayjor" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, spassword, proposalscore, midtermscore, finalscore, score, mayjor
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from student
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.srtp.model.Student" >
+    insert into student (sid, spassword, proposalscore, 
+      midtermscore, finalscore, score, 
+      mayjor)
+    values (#{sid,jdbcType=INTEGER}, #{spassword,jdbcType=VARCHAR}, #{proposalscore,jdbcType=INTEGER}, 
+      #{midtermscore,jdbcType=INTEGER}, #{finalscore,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, 
+      #{mayjor,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.srtp.model.Student" >
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="spassword != null" >
+        spassword,
+      </if>
+      <if test="proposalscore != null" >
+        proposalscore,
+      </if>
+      <if test="midtermscore != null" >
+        midtermscore,
+      </if>
+      <if test="finalscore != null" >
+        finalscore,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="mayjor != null" >
+        mayjor,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="spassword != null" >
+        #{spassword,jdbcType=VARCHAR},
+      </if>
+      <if test="proposalscore != null" >
+        #{proposalscore,jdbcType=INTEGER},
+      </if>
+      <if test="midtermscore != null" >
+        #{midtermscore,jdbcType=INTEGER},
+      </if>
+      <if test="finalscore != null" >
+        #{finalscore,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="mayjor != null" >
+        #{mayjor,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.srtp.model.Student" >
+    update student
+    <set >
+      <if test="spassword != null" >
+        spassword = #{spassword,jdbcType=VARCHAR},
+      </if>
+      <if test="proposalscore != null" >
+        proposalscore = #{proposalscore,jdbcType=INTEGER},
+      </if>
+      <if test="midtermscore != null" >
+        midtermscore = #{midtermscore,jdbcType=INTEGER},
+      </if>
+      <if test="finalscore != null" >
+        finalscore = #{finalscore,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="mayjor != null" >
+        mayjor = #{mayjor,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.srtp.model.Student" >
+    update student
+    set spassword = #{spassword,jdbcType=VARCHAR},
+      proposalscore = #{proposalscore,jdbcType=INTEGER},
+      midtermscore = #{midtermscore,jdbcType=INTEGER},
+      finalscore = #{finalscore,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      mayjor = #{mayjor,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

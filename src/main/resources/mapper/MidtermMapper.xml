@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.srtp.mapper.MidtermMapper" >
+  <resultMap id="BaseResultMap" type="com.srtp.model.Midterm" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="mtitle" property="mtitle" jdbcType="VARCHAR" />
+    <result column="mlocalpath" property="mlocalpath" jdbcType="VARCHAR" />
+    <result column="premotepath" property="premotepath" jdbcType="VARCHAR" />
+    <result column="anonymoustid" property="anonymoustid" jdbcType="INTEGER" />
+    <result column="anonymouspass" property="anonymouspass" jdbcType="BIT" />
+    <result column="mfilename" property="mfilename" jdbcType="VARCHAR" />
+    <result column="supervisortid" property="supervisortid" jdbcType="INTEGER" />
+    <result column="supervisorpass" property="supervisorpass" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.srtp.model.MidtermWithBLOBs" extends="BaseResultMap" >
+    <result column="anonymoustcomment" property="anonymoustcomment" jdbcType="LONGVARCHAR" />
+    <result column="supervisortcommment" property="supervisortcommment" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, mtitle, mlocalpath, premotepath, anonymoustid, anonymouspass, mfilename, supervisortid, 
+    supervisorpass
+  </sql>
+  <sql id="Blob_Column_List" >
+    anonymoustcomment, supervisortcommment
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from midterm
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from midterm
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.srtp.model.MidtermWithBLOBs" >
+    insert into midterm (sid, mtitle, mlocalpath, 
+      premotepath, anonymoustid, anonymouspass, 
+      mfilename, supervisortid, supervisorpass, 
+      anonymoustcomment, supervisortcommment
+      )
+    values (#{sid,jdbcType=INTEGER}, #{mtitle,jdbcType=VARCHAR}, #{mlocalpath,jdbcType=VARCHAR}, 
+      #{premotepath,jdbcType=VARCHAR}, #{anonymoustid,jdbcType=INTEGER}, #{anonymouspass,jdbcType=BIT}, 
+      #{mfilename,jdbcType=VARCHAR}, #{supervisortid,jdbcType=INTEGER}, #{supervisorpass,jdbcType=BIT}, 
+      #{anonymoustcomment,jdbcType=LONGVARCHAR}, #{supervisortcommment,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.srtp.model.MidtermWithBLOBs" >
+    insert into midterm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="mtitle != null" >
+        mtitle,
+      </if>
+      <if test="mlocalpath != null" >
+        mlocalpath,
+      </if>
+      <if test="premotepath != null" >
+        premotepath,
+      </if>
+      <if test="anonymoustid != null" >
+        anonymoustid,
+      </if>
+      <if test="anonymouspass != null" >
+        anonymouspass,
+      </if>
+      <if test="mfilename != null" >
+        mfilename,
+      </if>
+      <if test="supervisortid != null" >
+        supervisortid,
+      </if>
+      <if test="supervisorpass != null" >
+        supervisorpass,
+      </if>
+      <if test="anonymoustcomment != null" >
+        anonymoustcomment,
+      </if>
+      <if test="supervisortcommment != null" >
+        supervisortcommment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="mtitle != null" >
+        #{mtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mlocalpath != null" >
+        #{mlocalpath,jdbcType=VARCHAR},
+      </if>
+      <if test="premotepath != null" >
+        #{premotepath,jdbcType=VARCHAR},
+      </if>
+      <if test="anonymoustid != null" >
+        #{anonymoustid,jdbcType=INTEGER},
+      </if>
+      <if test="anonymouspass != null" >
+        #{anonymouspass,jdbcType=BIT},
+      </if>
+      <if test="mfilename != null" >
+        #{mfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="supervisortid != null" >
+        #{supervisortid,jdbcType=INTEGER},
+      </if>
+      <if test="supervisorpass != null" >
+        #{supervisorpass,jdbcType=BIT},
+      </if>
+      <if test="anonymoustcomment != null" >
+        #{anonymoustcomment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="supervisortcommment != null" >
+        #{supervisortcommment,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.srtp.model.MidtermWithBLOBs" >
+    update midterm
+    <set >
+      <if test="mtitle != null" >
+        mtitle = #{mtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mlocalpath != null" >
+        mlocalpath = #{mlocalpath,jdbcType=VARCHAR},
+      </if>
+      <if test="premotepath != null" >
+        premotepath = #{premotepath,jdbcType=VARCHAR},
+      </if>
+      <if test="anonymoustid != null" >
+        anonymoustid = #{anonymoustid,jdbcType=INTEGER},
+      </if>
+      <if test="anonymouspass != null" >
+        anonymouspass = #{anonymouspass,jdbcType=BIT},
+      </if>
+      <if test="mfilename != null" >
+        mfilename = #{mfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="supervisortid != null" >
+        supervisortid = #{supervisortid,jdbcType=INTEGER},
+      </if>
+      <if test="supervisorpass != null" >
+        supervisorpass = #{supervisorpass,jdbcType=BIT},
+      </if>
+      <if test="anonymoustcomment != null" >
+        anonymoustcomment = #{anonymoustcomment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="supervisortcommment != null" >
+        supervisortcommment = #{supervisortcommment,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.srtp.model.MidtermWithBLOBs" >
+    update midterm
+    set mtitle = #{mtitle,jdbcType=VARCHAR},
+      mlocalpath = #{mlocalpath,jdbcType=VARCHAR},
+      premotepath = #{premotepath,jdbcType=VARCHAR},
+      anonymoustid = #{anonymoustid,jdbcType=INTEGER},
+      anonymouspass = #{anonymouspass,jdbcType=BIT},
+      mfilename = #{mfilename,jdbcType=VARCHAR},
+      supervisortid = #{supervisortid,jdbcType=INTEGER},
+      supervisorpass = #{supervisorpass,jdbcType=BIT},
+      anonymoustcomment = #{anonymoustcomment,jdbcType=LONGVARCHAR},
+      supervisortcommment = #{supervisortcommment,jdbcType=LONGVARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.srtp.model.Midterm" >
+    update midterm
+    set mtitle = #{mtitle,jdbcType=VARCHAR},
+      mlocalpath = #{mlocalpath,jdbcType=VARCHAR},
+      premotepath = #{premotepath,jdbcType=VARCHAR},
+      anonymoustid = #{anonymoustid,jdbcType=INTEGER},
+      anonymouspass = #{anonymouspass,jdbcType=BIT},
+      mfilename = #{mfilename,jdbcType=VARCHAR},
+      supervisortid = #{supervisortid,jdbcType=INTEGER},
+      supervisorpass = #{supervisorpass,jdbcType=BIT}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

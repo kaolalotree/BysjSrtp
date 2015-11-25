@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.srtp.mapper.KtbgMapper" >
+  <resultMap id="BaseResultMap" type="com.srtp.model.Ktbg" >
+    <id column="saccount" property="saccount" jdbcType="BIGINT" />
+    <result column="titleeng" property="titleeng" jdbcType="VARCHAR" />
+    <result column="titlechi" property="titlechi" jdbcType="VARCHAR" />
+    <result column="titletype" property="titletype" jdbcType="VARCHAR" />
+    <result column="filepath" property="filepath" jdbcType="VARCHAR" />
+    <result column="supervisorpass" property="supervisorpass" jdbcType="TINYINT" />
+    <result column="ds_grade" property="dsGrade" jdbcType="INTEGER" />
+    <result column="anonymouspass" property="anonymouspass" jdbcType="TINYINT" />
+    <result column="md_grade" property="mdGrade" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.srtp.model.KtbgWithBLOBs" extends="BaseResultMap" >
+    <result column="titlereq" property="titlereq" jdbcType="LONGVARCHAR" />
+    <result column="supervisorcomment" property="supervisorcomment" jdbcType="LONGVARCHAR" />
+    <result column="anonymouscomment" property="anonymouscomment" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    saccount, titleeng, titlechi, titletype, filepath, supervisorpass, ds_grade, anonymouspass, 
+    md_grade
+  </sql>
+  <sql id="Blob_Column_List" >
+    titlereq, supervisorcomment, anonymouscomment
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ktbg
+    where saccount = #{saccount,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ktbg
+    where saccount = #{saccount,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.srtp.model.KtbgWithBLOBs" >
+    insert into ktbg (saccount, titleeng, titlechi, 
+      titletype, filepath, supervisorpass, 
+      ds_grade, anonymouspass, md_grade, 
+      titlereq, supervisorcomment, anonymouscomment
+      )
+    values (#{saccount,jdbcType=BIGINT}, #{titleeng,jdbcType=VARCHAR}, #{titlechi,jdbcType=VARCHAR}, 
+      #{titletype,jdbcType=VARCHAR}, #{filepath,jdbcType=VARCHAR}, #{supervisorpass,jdbcType=TINYINT}, 
+      #{dsGrade,jdbcType=INTEGER}, #{anonymouspass,jdbcType=TINYINT}, #{mdGrade,jdbcType=INTEGER}, 
+      #{titlereq,jdbcType=LONGVARCHAR}, #{supervisorcomment,jdbcType=LONGVARCHAR}, #{anonymouscomment,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.srtp.model.KtbgWithBLOBs" >
+    insert into ktbg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="saccount != null" >
+        saccount,
+      </if>
+      <if test="titleeng != null" >
+        titleeng,
+      </if>
+      <if test="titlechi != null" >
+        titlechi,
+      </if>
+      <if test="titletype != null" >
+        titletype,
+      </if>
+      <if test="filepath != null" >
+        filepath,
+      </if>
+      <if test="supervisorpass != null" >
+        supervisorpass,
+      </if>
+      <if test="dsGrade != null" >
+        ds_grade,
+      </if>
+      <if test="anonymouspass != null" >
+        anonymouspass,
+      </if>
+      <if test="mdGrade != null" >
+        md_grade,
+      </if>
+      <if test="titlereq != null" >
+        titlereq,
+      </if>
+      <if test="supervisorcomment != null" >
+        supervisorcomment,
+      </if>
+      <if test="anonymouscomment != null" >
+        anonymouscomment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="saccount != null" >
+        #{saccount,jdbcType=BIGINT},
+      </if>
+      <if test="titleeng != null" >
+        #{titleeng,jdbcType=VARCHAR},
+      </if>
+      <if test="titlechi != null" >
+        #{titlechi,jdbcType=VARCHAR},
+      </if>
+      <if test="titletype != null" >
+        #{titletype,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="supervisorpass != null" >
+        #{supervisorpass,jdbcType=TINYINT},
+      </if>
+      <if test="dsGrade != null" >
+        #{dsGrade,jdbcType=INTEGER},
+      </if>
+      <if test="anonymouspass != null" >
+        #{anonymouspass,jdbcType=TINYINT},
+      </if>
+      <if test="mdGrade != null" >
+        #{mdGrade,jdbcType=INTEGER},
+      </if>
+      <if test="titlereq != null" >
+        #{titlereq,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="supervisorcomment != null" >
+        #{supervisorcomment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="anonymouscomment != null" >
+        #{anonymouscomment,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.srtp.model.KtbgWithBLOBs" >
+    update ktbg
+    <set >
+      <if test="titleeng != null" >
+        titleeng = #{titleeng,jdbcType=VARCHAR},
+      </if>
+      <if test="titlechi != null" >
+        titlechi = #{titlechi,jdbcType=VARCHAR},
+      </if>
+      <if test="titletype != null" >
+        titletype = #{titletype,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        filepath = #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="supervisorpass != null" >
+        supervisorpass = #{supervisorpass,jdbcType=TINYINT},
+      </if>
+      <if test="dsGrade != null" >
+        ds_grade = #{dsGrade,jdbcType=INTEGER},
+      </if>
+      <if test="anonymouspass != null" >
+        anonymouspass = #{anonymouspass,jdbcType=TINYINT},
+      </if>
+      <if test="mdGrade != null" >
+        md_grade = #{mdGrade,jdbcType=INTEGER},
+      </if>
+      <if test="titlereq != null" >
+        titlereq = #{titlereq,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="supervisorcomment != null" >
+        supervisorcomment = #{supervisorcomment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="anonymouscomment != null" >
+        anonymouscomment = #{anonymouscomment,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where saccount = #{saccount,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.srtp.model.KtbgWithBLOBs" >
+    update ktbg
+    set titleeng = #{titleeng,jdbcType=VARCHAR},
+      titlechi = #{titlechi,jdbcType=VARCHAR},
+      titletype = #{titletype,jdbcType=VARCHAR},
+      filepath = #{filepath,jdbcType=VARCHAR},
+      supervisorpass = #{supervisorpass,jdbcType=TINYINT},
+      ds_grade = #{dsGrade,jdbcType=INTEGER},
+      anonymouspass = #{anonymouspass,jdbcType=TINYINT},
+      md_grade = #{mdGrade,jdbcType=INTEGER},
+      titlereq = #{titlereq,jdbcType=LONGVARCHAR},
+      supervisorcomment = #{supervisorcomment,jdbcType=LONGVARCHAR},
+      anonymouscomment = #{anonymouscomment,jdbcType=LONGVARCHAR}
+    where saccount = #{saccount,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.srtp.model.Ktbg" >
+    update ktbg
+    set titleeng = #{titleeng,jdbcType=VARCHAR},
+      titlechi = #{titlechi,jdbcType=VARCHAR},
+      titletype = #{titletype,jdbcType=VARCHAR},
+      filepath = #{filepath,jdbcType=VARCHAR},
+      supervisorpass = #{supervisorpass,jdbcType=TINYINT},
+      ds_grade = #{dsGrade,jdbcType=INTEGER},
+      anonymouspass = #{anonymouspass,jdbcType=TINYINT},
+      md_grade = #{mdGrade,jdbcType=INTEGER}
+    where saccount = #{saccount,jdbcType=BIGINT}
+  </update>
+</mapper>

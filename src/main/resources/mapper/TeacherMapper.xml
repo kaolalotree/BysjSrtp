@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.srtp.mapper.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.srtp.model.Teacher" >
+    <id column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="tpassword" property="tpassword" jdbcType="VARCHAR" />
+    <result column="major" property="major" jdbcType="VARCHAR" />
+    <result column="major2" property="major2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tid, tpassword, major, major2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from teacher
+    where tid = #{tid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from teacher
+    where tid = #{tid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.srtp.model.Teacher" >
+    insert into teacher (tid, tpassword, major, 
+      major2)
+    values (#{tid,jdbcType=INTEGER}, #{tpassword,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, 
+      #{major2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.srtp.model.Teacher" >
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="tpassword != null" >
+        tpassword,
+      </if>
+      <if test="major != null" >
+        major,
+      </if>
+      <if test="major2 != null" >
+        major2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="tpassword != null" >
+        #{tpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null" >
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="major2 != null" >
+        #{major2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.srtp.model.Teacher" >
+    update teacher
+    <set >
+      <if test="tpassword != null" >
+        tpassword = #{tpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null" >
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="major2 != null" >
+        major2 = #{major2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.srtp.model.Teacher" >
+    update teacher
+    set tpassword = #{tpassword,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      major2 = #{major2,jdbcType=VARCHAR}
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+</mapper>

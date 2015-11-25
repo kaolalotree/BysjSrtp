@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.srtp.mapper.AssociationMapper" >
+  <resultMap id="BaseResultMap" type="com.srtp.model.Association" >
+    <id column="saccount" property="saccount" jdbcType="BIGINT" />
+    <result column="dsaccount" property="dsaccount" jdbcType="BIGINT" />
+    <result column="mdaccount" property="mdaccount" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    saccount, dsaccount, mdaccount
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from association
+    where saccount = #{saccount,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from association
+    where saccount = #{saccount,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.srtp.model.Association" >
+    insert into association (saccount, dsaccount, mdaccount
+      )
+    values (#{saccount,jdbcType=BIGINT}, #{dsaccount,jdbcType=BIGINT}, #{mdaccount,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.srtp.model.Association" >
+    insert into association
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="saccount != null" >
+        saccount,
+      </if>
+      <if test="dsaccount != null" >
+        dsaccount,
+      </if>
+      <if test="mdaccount != null" >
+        mdaccount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="saccount != null" >
+        #{saccount,jdbcType=BIGINT},
+      </if>
+      <if test="dsaccount != null" >
+        #{dsaccount,jdbcType=BIGINT},
+      </if>
+      <if test="mdaccount != null" >
+        #{mdaccount,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.srtp.model.Association" >
+    update association
+    <set >
+      <if test="dsaccount != null" >
+        dsaccount = #{dsaccount,jdbcType=BIGINT},
+      </if>
+      <if test="mdaccount != null" >
+        mdaccount = #{mdaccount,jdbcType=BIGINT},
+      </if>
+    </set>
+    where saccount = #{saccount,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.srtp.model.Association" >
+    update association
+    set dsaccount = #{dsaccount,jdbcType=BIGINT},
+      mdaccount = #{mdaccount,jdbcType=BIGINT}
+    where saccount = #{saccount,jdbcType=BIGINT}
+  </update>
+</mapper>
